@@ -70,6 +70,7 @@ export default function Navigate({ recipe, plan, speed, onCancel, onFinish }: Pr
               <svg viewBox="0 0 200 200" aria-hidden="true">
                 <circle className="track" cx="100" cy="100" r={R} />
                 <circle
+                  key={idx} /* 工程ごとに作り直し、100%→0%の巻き戻りアニメを防ぐ */
                   className="arc" cx="100" cy="100" r={R}
                   strokeDasharray={C} strokeDashoffset={C * (1 - stepProgress)}
                   transform="rotate(-90 100 100)"
