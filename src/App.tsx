@@ -7,7 +7,7 @@ import Done from './Done'
 export type Result = { beans: number; water: number; elapsed: number }
 
 export default function App() {
-  const [recipeId, setRecipeId] = useState(recipes[0].id)
+  const [recipeId, setRecipeId] = useState(recipes[0]!.id)
   const [cups, setCups] = useState(2)
   const [screen, setScreen] = useState<'setup' | 'nav' | 'done'>('setup')
   const [speed, setSpeed] = useState(1) // モック確認用の倍速

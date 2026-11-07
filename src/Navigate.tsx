@@ -41,7 +41,7 @@ export default function Navigate({ recipe, plan, speed, onCancel, onFinish }: Pr
 
   const steps = plan.steps
   const idx = steps.findIndex((s) => elapsed >= s.startSec && elapsed < s.endSec)
-  const before = elapsed < steps[0].startSec
+  const before = elapsed < steps[0]!.startSec
   const finished = elapsed >= recipe.finishSec
   const cur: PlanStep | undefined = steps[idx]
 
