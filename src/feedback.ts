@@ -30,6 +30,11 @@ export function beep(kind: 'warn' | 'switch' | 'done') {
 export async function keepAwake(on: boolean) {
   try {
     if (on) lock = (await navigator.wakeLock?.request('screen')) ?? null
-    else { await lock?.release(); lock = null }
-  } catch { /* 非対応・拒否は無視 */ }
+    else {
+      await lock?.release()
+      lock = null
+    }
+  } catch {
+    /* 非対応・拒否は無視 */
+  }
 }

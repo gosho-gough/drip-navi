@@ -19,13 +19,21 @@ export default function App() {
   return (
     <div className="app">
       {screen === 'setup' && (
-        <Setup {...{ recipeId, setRecipeId, cups, setCups, recipe, plan, speed, setSpeed }} onStart={() => setScreen('nav')} />
+        <Setup
+          {...{ recipeId, setRecipeId, cups, setCups, recipe, plan, speed, setSpeed }}
+          onStart={() => setScreen('nav')}
+        />
       )}
       {screen === 'nav' && (
         <Navigate
-          recipe={recipe} plan={plan} speed={speed}
+          recipe={recipe}
+          plan={plan}
+          speed={speed}
           onCancel={() => setScreen('setup')}
-          onFinish={(elapsed) => { setResult({ beans: plan.beans, water: plan.water, elapsed }); setScreen('done') }}
+          onFinish={(elapsed) => {
+            setResult({ beans: plan.beans, water: plan.water, elapsed })
+            setScreen('done')
+          }}
         />
       )}
       {screen === 'done' && result && (
