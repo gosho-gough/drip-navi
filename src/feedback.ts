@@ -3,7 +3,8 @@ let lock: WakeLockSentinel | null = null
 
 // スタートボタンのタップ時に呼ぶ(自動再生制限対策)
 export function initAudio() {
-  const AC = window.AudioContext || (window as any).webkitAudioContext
+  const AC =
+    window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
   if (!AC) return
   ctx = ctx ?? new AC()
   ctx.resume()
@@ -30,6 +31,11 @@ export function beep(kind: 'warn' | 'switch' | 'done') {
 export async function keepAwake(on: boolean) {
   try {
     if (on) lock = (await navigator.wakeLock?.request('screen')) ?? null
-    else { await lock?.release(); lock = null }
-  } catch { /* 非対応・拒否は無視 */ }
+    else {
+      await lock?.release()
+      lock = null
+    }
+  } catch {
+    /* 非対応・拒否は無視 */
+  }
 }
